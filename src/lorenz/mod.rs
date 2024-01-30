@@ -65,7 +65,7 @@ pub mod lorenz {
 
                 self.x += self.dt * dx;
                 self.y += self.dt * dy;
-                self.x += self.dt * dz;
+                self.z += self.dt * dz;
             }
 
             (x_values, y_values, z_values)
@@ -80,7 +80,7 @@ pub mod lorenz {
                 .caption("Lorenz System Trajectories", ("sans-serif", 20))
                 .x_label_area_size(40)
                 .y_label_area_size(40)
-                .build_ranged(-30.0..30.0, -30.0..30.0)
+                .build_cartesian_2d(-30.0..30.0, -30.0..30.0)
                 .unwrap();
             chart
                 .draw_series(trajectories.0.iter().zip(trajectories.1.iter()).map(|(x, y)| {
