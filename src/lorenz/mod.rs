@@ -73,20 +73,43 @@ pub mod lorenz {
 
         /// Plots the Lorenz system trajectories
         pub fn display(&self, trajectories: (Vec<f64>, Vec<f64>, Vec<f64>)) {
-            let root = BitMapBackend::new("lorenz_plot.png", (800, 600))
-                .into_drawing_area();
+            let root = BitMapBackend::new("lorenz_plot.png", (800, 600)).into_drawing_area();
             root.fill(&WHITE).unwrap();
+
             let mut chart = ChartBuilder::on(&root)
-                .caption("Lorenz System Trajectories", ("sans-serif", 20))
+                .caption("Lorenz System Trajectories", ("Arial", 20).into_font())
+                .margin(5)
                 .x_label_area_size(40)
                 .y_label_area_size(40)
-                .build_cartesian_2d(-30.0..30.0, -30.0..30.0)
+                .build_cartesian_2d(0.0..self.steps as f64, -20.0..20.0)
                 .unwrap();
+
             chart
-                .draw_series(trajectories.0.iter().zip(trajectories.1.iter()).map(|(x, y)| {
-                    Circle::new((*x, *y), 2, BLUE.filled())
-                }))
+                .configure_mesh()
+                .x_desc("Time Step")
+                .y_desc("Values")
+                .draw()
                 .unwrap();
+
+            chart
+                .draw_series(LineSeries::new(trajectories.0.iter().enumerate().map(|(i, &val)| (i as f64, val)), &RED))
+                .unwrap()
+                .label("X Trajectory")
+                .legend(|(x, y)| PathElement::new(vec![(x, y), (x + 20, y)], &RED));
+
+            chart
+                .draw_series(LineSeries::new(trajectories.1.iter().enumerate().map(|(i, &val)| (i as f64, val)), &GREEN))
+                .unwrap()
+                .label("Y Trajectory")
+                .legend(|(x, y)| PathElement::new(vec![(x, y - 10), (x + 20, y - 10)], &GREEN));
+
+            chart
+                .draw_series(LineSeries::new(trajectories.2.iter().enumerate().map(|(i, &val)| (i as f64, val)), &BLUE))
+                .unwrap()
+                .label("Z Trajectory")
+                .legend(|(x, y)| PathElement::new(vec![(x, y - 20), (x + 20, y - 20)], &BLUE));
+
+            chart.configure_series_labels().background_style(&WHITE.mix(0.8)).draw().unwrap();
         }
     }
 }
