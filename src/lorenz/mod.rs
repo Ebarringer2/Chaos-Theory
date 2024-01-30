@@ -1,4 +1,4 @@
-mod lorenz {
+pub mod lorenz {
     use plotters::prelude::*;
     pub struct LorenzSystem {
         pub x: f64,
@@ -73,33 +73,20 @@ mod lorenz {
 
         /// Plots the Lorenz system trajectories
         pub fn display(&self, trajectories: (Vec<f64>, Vec<f64>, Vec<f64>)) {
-            let root = BitMapBackend::new("lorenz_attractor.png", (800, 600)).into_drawing_area();
+            let root = BitMapBackend::new("lorenz_plot.png", (800, 600))
+                .into_drawing_area();
             root.fill(&WHITE).unwrap();
             let mut chart = ChartBuilder::on(&root)
-                .margin(5)
-                .set_label_area_size(LabelAreaPosition::Left, 40)
-                .set_label_area_size(LabelAreaPosition::Bottom, 40)
-                .caption("Lorenz Attractor", ("Arial", 20).into_font())
-                .build_cartesian_3d(-20.0..20.0, -30.0..30.0, 0.0..50.0)
+                .caption("Lorenz System Trajectories", ("sans-serif", 20))
+                .x_label_area_size(40)
+                .y_label_area_size(40)
+                .build_ranged(-30.0..30.0, -30.0..30.0)
                 .unwrap();
-            chart.with_projection(|mut pb| {
-                pb.yaw = 3.0;
-                pb.pitch = 0.5;
-                pb.scale = 1.5;
-                pb.into_matrix()
-            });
-            chart.configure_axes().draw().unwrap();
-            chart.draw_series(
-                LineSeries::new(
-                    (0..self.steps).map(|i| (trajectories.0[i], trajectories.1[i], trajectories.2[i])),
-                    &BLACK,
-                )
-                .style(ShapeStyle {
-                    fill_color: Some(&BLACK.mix(0.5)),
-                    line_width: 1,
-                    color: &BLACK,
-                }),                
-            );
+            chart
+                .draw_series(trajectories.0.iter().zip(trajectories.1.iter()).map(|(x, y)| {
+                    Circle::new((*x, *y), 2, BLUE.filled())
+                }))
+                .unwrap();
         }
     }
 }

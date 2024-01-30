@@ -1,5 +1,18 @@
 mod lorenz; 
+use lorenz::lorenz::LorenzSystem;
 
 fn main() {
-    println!("");
+    let beta: f64 = 8.0 / 3.0;
+    let mut ls: LorenzSystem = LorenzSystem::new(
+        0.0,
+        0.0,
+        0.0,
+        10.0,
+        28.0,
+        beta,
+        0.01,
+        1000
+    );
+    let trajectories: (Vec<f64>, Vec<f64>, Vec<f64>) = ls.simulate();
+    ls.display(trajectories);
 }

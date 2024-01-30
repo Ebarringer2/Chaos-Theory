@@ -1,5 +1,6 @@
 debug/
 target/
+.vscode/
 **/*.rs.bk
 *.pdb
 /target
