@@ -27,7 +27,7 @@ pub mod rossler {
         /// dt: small time increment used in each iteration of the simulation
         /// 
         /// steps: number of iterations in the simulation
-        pub fn new(&self, x: f64, y: f64, z: f64, a: f64, b: f64, c: f64, dt: f64, steps: usize) -> RosslerSystem {
+        pub fn new(x: f64, y: f64, z: f64, a: f64, b: f64, c: f64, dt: f64, steps: usize) -> RosslerSystem {
             RosslerSystem {
                 x, 
                 y,
