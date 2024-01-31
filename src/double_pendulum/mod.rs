@@ -125,7 +125,7 @@ pub mod double_pendulum {
             root.fill(&WHITE).unwrap();
 
             let mut chart: ChartContext<'_, BitMapBackend<'_>, Cartesian2d<plotters::coord::types::RangedCoordf64, plotters::coord::types::RangedCoordf64>> = ChartBuilder::on(&root)
-                .caption("Lorenz System Trajectories", ("Arial", 20).into_font())
+                .caption("Double Pendulum Trajectories", ("Arial", 20).into_font())
                 .margin(5)
                 .x_label_area_size(40)
                 .y_label_area_size(40)

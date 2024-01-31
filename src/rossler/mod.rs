@@ -73,7 +73,7 @@ pub mod rossler {
             root.fill(&WHITE).unwrap();
 
             let mut chart = ChartBuilder::on(&root)
-                .caption("Lorenz System Trajectories", ("Arial", 20).into_font())
+                .caption("Rossler System Trajectories", ("Arial", 20).into_font())
                 .margin(5)
                 .x_label_area_size(40)
                 .y_label_area_size(40)
