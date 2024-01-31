@@ -1,6 +1,7 @@
 mod lorenz; 
 mod double_pendulum;
 mod rossler;
+mod cellular_automata;
 
 use lorenz::lorenz::LorenzSystem;
 use double_pendulum::double_pendulum::DoublePendulum;
@@ -31,7 +32,7 @@ fn main() {
         1.0,
         0.15,
         0.225,
-        5.7,
+        20.0,
         0.001,
         10000
     );
