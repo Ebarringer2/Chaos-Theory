@@ -1,5 +1,6 @@
 pub mod double_pendulum {
     use plotters::prelude::*;
+    use rand::Rng;
     pub struct DoublePendulum {
         initial_theta_1: f64,
         initial_theta_2: f64,
@@ -32,6 +33,35 @@ pub mod double_pendulum {
                 initial_theta_2,
                 initial_omega_1,
                 initial_omega_2,
+                dt,
+                g,
+                steps
+            }
+        }
+
+        /// Generates a Double Pendulum model with random attributes
+        /// 
+        /// *Params
+        /// 
+        /// dt: small time increment used in each iteration of the simulation
+        /// 
+        /// g: acceleration due to gravity
+        /// 
+        /// steps: number of iterations
+        pub fn new_random(dt: f64, g: f64, steps: usize) -> DoublePendulum {
+            let mut rng: rand::prelude::ThreadRng = rand::thread_rng();
+            let max_value: f64 = 90.0;
+            let min_value: f64 = 0.0;
+            let theta1: f64 = rng.gen_range(min_value..max_value);
+            let theta2: f64 = rng.gen_range(min_value..max_value);
+            let omega1: f64 = rng.gen_range(min_value..max_value);
+            let omega2: f64 = rng.gen_range(min_value..max_value);
+
+            DoublePendulum {
+                initial_theta_1: theta1,
+                initial_theta_2: theta2,
+                initial_omega_1: omega1,
+                initial_omega_2: omega2,
                 dt,
                 g,
                 steps
