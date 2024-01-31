@@ -73,7 +73,7 @@ pub mod lorenz {
 
         /// Plots the Lorenz system trajectories
         pub fn display(&self, trajectories: (Vec<f64>, Vec<f64>, Vec<f64>)) {
-            let root = BitMapBackend::new("lorenz_plot.png", (800, 600)).into_drawing_area();
+            let root: DrawingArea<BitMapBackend<'_>, plotters::coord::Shift> = BitMapBackend::new("lorenz_plot.png", (800, 600)).into_drawing_area();
             root.fill(&WHITE).unwrap();
 
             let mut chart = ChartBuilder::on(&root)
