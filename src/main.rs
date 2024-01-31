@@ -6,6 +6,7 @@ mod cellular_automata;
 use lorenz::lorenz::LorenzSystem;
 use double_pendulum::double_pendulum::DoublePendulum;
 use rossler::rossler::RosslerSystem;
+use cellular_automata::cellular_automata::Grid;
 
 fn main() {
     let beta: f64 = 8.0 / 3.0;
@@ -26,7 +27,7 @@ fn main() {
     //let dp_trajectories: (Vec<f64>, Vec<f64>) = dp.simulate();
     //dp.display(dp_trajectories);
 
-    let mut rs: RosslerSystem = RosslerSystem::new(
+    let rs: RosslerSystem = RosslerSystem::new(
         1.0,
         1.0,
         1.0,
@@ -38,4 +39,7 @@ fn main() {
     );
     let rs_trajectories: (Vec<f64>, Vec<f64>, Vec<f64>) = rs.simulate();
     rs.display(rs_trajectories);
+
+    let mut g: Grid = Grid::new(10, 10, 100);
+    g.simulate(1000);
 }

@@ -1,6 +1,10 @@
 pub mod cellular_automata {
+    use rand::Rng;
+    use std::thread;
+    use std::time::Duration;
+
     #[derive(Clone)]
-    pub struct Cell {
+    struct Cell {
         pub alive: bool,
         pub dead: bool
     }
@@ -23,8 +27,11 @@ pub mod cellular_automata {
         /// num_cells: number of cells in the grid
         pub fn new(height: usize, width: usize, num_cells: usize) -> Grid {
             let mut cells: Vec<Cell> = Vec::with_capacity(num_cells);
-            for _ in 0..num_cells {
-                cells.push(Cell {alive: true, dead: false })
+            for _ in 0..height * width {
+                cells.push(Cell {
+                    alive: rand::thread_rng().gen_bool(0.5), // 50% chance of being alive
+                    dead: false,
+                });
             }
 
             Grid {
@@ -39,6 +46,7 @@ pub mod cellular_automata {
             for _ in 0..steps {
                 self.update_cells();
                 self.print_grid();
+                thread::sleep(Duration::from_millis(500));
             }
         }
 
