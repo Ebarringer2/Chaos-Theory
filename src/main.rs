@@ -2,11 +2,13 @@ mod lorenz;
 mod double_pendulum;
 mod rossler;
 mod cellular_automata;
+mod quantum_chaos;
 
 use lorenz::lorenz::LorenzSystem;
 use double_pendulum::double_pendulum::DoublePendulum;
 use rossler::rossler::RosslerSystem;
 use cellular_automata::cellular_automata::Grid;
+use quantum_chaos::random_matrix_theory::Matrix;
 
 fn main() {
     let beta: f64 = 8.0 / 3.0;
@@ -41,5 +43,9 @@ fn main() {
     rs.display(rs_trajectories);
 
     let mut g: Grid = Grid::new(10, 10, 100);
-    g.simulate(1000);
+    //g.simulate(1000);
+
+    let mut goe_matrix: Matrix = Matrix::new(3, 3);
+    goe_matrix.random_gaussian();
+    println!("{:#?}", goe_matrix)
 }
