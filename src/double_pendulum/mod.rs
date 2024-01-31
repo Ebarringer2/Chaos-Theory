@@ -90,19 +90,19 @@ pub mod double_pendulum {
                 theta1_values.push(theta1);
                 theta2_values.push(theta2);
 
-                let numerator_alpha1 = -self.g * (2.0 * theta1.sin()
+                let numerator_alpha1: f64 = -self.g * (2.0 * theta1.sin()
                 + (theta1 - 2.0 * theta2).sin()
                 + 2.0 * (theta1 - theta2).sin() * (omega2.powi(2) + omega1.powi(2) * (theta1 - theta2).cos()));
                 let denominator_alpha1 = 3.0 - (2.0 * theta1 - 2.0 * theta2).cos();
-                let alpha1 = numerator_alpha1 / denominator_alpha1;
-                let term1_alpha2 = 2.0 * (theta1 - theta2).sin();
-                let term2_alpha2 = 2.0 * theta1.cos() * omega1.powi(2);
-                let term3_alpha2 =
+                let alpha1: f64 = numerator_alpha1 / denominator_alpha1;
+                let term1_alpha2: f64 = 2.0 * (theta1 - theta2).sin();
+                let term2_alpha2: f64 = 2.0 * theta1.cos() * omega1.powi(2);
+                let term3_alpha2: f64 =
                     self.g * (2.0 * theta1.sin() + (theta1 - 2.0 * theta2).sin() + 2.0 * (theta1 - theta2).sin()
                         * (omega2.powi(2) + omega1.powi(2) * (theta1 - theta2).cos()));
-                let numerator_alpha2 = term1_alpha2 * (term2_alpha2 + term3_alpha2);
-                let denominator_alpha2 = 3.0 - (2.0 * theta1 - 2.0 * theta2).cos();
-                let alpha2 = numerator_alpha2 / denominator_alpha2;
+                let numerator_alpha2: f64 = term1_alpha2 * (term2_alpha2 + term3_alpha2);
+                let denominator_alpha2: f64 = 3.0 - (2.0 * theta1 - 2.0 * theta2).cos();
+                let alpha2: f64 = numerator_alpha2 / denominator_alpha2;
 
                 omega1 = omega1 + alpha1 * self.dt;
                 omega2 = omega2 + alpha2 * self.dt;
@@ -152,5 +152,4 @@ pub mod double_pendulum {
                 .legend(|(x, y)| PathElement::new(vec![(x, y - 10), (x + 20, y - 10)], &GREEN));
         }
     }
-
 }

@@ -1,8 +1,10 @@
 mod lorenz; 
 mod double_pendulum;
+mod rossler;
 
 use lorenz::lorenz::LorenzSystem;
 use double_pendulum::double_pendulum::DoublePendulum;
+use rossler::rossler::RosslerSystem;
 
 fn main() {
     let beta: f64 = 8.0 / 3.0;
