@@ -19,15 +19,7 @@ fn main() {
     let ls_trajectories: (Vec<f64>, Vec<f64>, Vec<f64>) = ls.simulate();
     ls.display(ls_trajectories);
 
-    let mut dp: DoublePendulum = DoublePendulum::new(
-        0.1,
-        0.1,
-        10.0,
-        0.0,
-        0.001,
-        9.81,
-        1000
-    );
+    let mut dp: DoublePendulum = DoublePendulum::new_random(0.001, 9.81, 10000);
     let dp_trajectories: (Vec<f64>, Vec<f64>) = dp.simulate();
     dp.display(dp_trajectories);
 }

@@ -39,7 +39,9 @@ pub mod double_pendulum {
             }
         }
 
-        /// Generates a Double Pendulum model with random attributes
+        /// Generates a Double Pendulum model with random attributes.
+        /// 
+        /// Be careful! Creating a random model will almost always have unpredicatable and faulty behavior.
         /// 
         /// *Params
         /// 
@@ -56,6 +58,12 @@ pub mod double_pendulum {
             let theta2: f64 = rng.gen_range(min_value..max_value);
             let omega1: f64 = rng.gen_range(min_value..max_value);
             let omega2: f64 = rng.gen_range(min_value..max_value);
+
+            println!("Creating random Double Pendulum model");
+            println!("Theta 1: {}", theta1);
+            println!("Theta 2: {}", theta2);
+            println!("Omega 1: {}", omega1);
+            println!("Omega 2: {}", omega2);
 
             DoublePendulum {
                 initial_theta_1: theta1,
@@ -100,8 +108,14 @@ pub mod double_pendulum {
                 omega2 = omega2 + alpha2 * self.dt;
                 theta1 = theta1 + omega1 * self.dt;
                 theta2 = theta2 + omega2 * self.dt;
-            }
 
+                //println!("Theta 1: {}", theta1);
+                //println!("Theta 2: {}", theta2);
+                //println!("Omega 1: {}", omega1);
+                //println!("Omega 2: {}", omega2);
+            }
+            //println!("Theta 1 Values: {:?}", theta1_values);
+            //println!("Theta 2 Values: {:?}", theta2_values);
             (theta1_values, theta2_values)
         }
 
@@ -115,7 +129,7 @@ pub mod double_pendulum {
                 .margin(5)
                 .x_label_area_size(40)
                 .y_label_area_size(40)
-                .build_cartesian_2d(0.0..self.steps as f64, -20.0..20.0)
+                .build_cartesian_2d(0.0..self.steps as f64, -100.0..100.0)
                 .unwrap();
 
             chart
